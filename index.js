@@ -1,29 +1,32 @@
 var inquirer = require('inquirer');
+const fs = require("fs");
+const generateMarkdown = require("./utils/generateMarkdown");
 
-inquirer.prompt ([
+
+const questions = [
   {
     type: 'input',
     name: 'Title',
     message: "What's the name of you project",
   },
   {
-  type: 'input',
+    type: 'input',
     name: 'Description',
-    message: "Explain what this project is about (max 200 characters)",
+    message: "Explain what this project about?",
   },
   {
     type: 'input',
-      name: 'Installation',
-      message: "Provide installation informaiton",
-    },
-    {
-        type: 'input',
-          name: 'Usage information',
-          message: "Provide usage informaiton",
-        },
+    name: 'Installation',
+    message: "What are the installatoin requirements?",
+  },
+  {
+    type: 'input',
+    name: 'Usage information',
+    message: "Details about using this code?",
+  },
   {
     type: 'checkbox',
-    message: 'What licence do you require',
+    message: "What licence do you require?",
     name: 'Licences',
     choices: [
       new inquirer.Separator(' = licence = '),
@@ -31,7 +34,7 @@ inquirer.prompt ([
         name: 'Licence 1',
       },
       {
-        name: 'FLicence 2',
+        name: 'Licence 2',
       },
       {
         name: 'Licence 3',
@@ -43,30 +46,50 @@ inquirer.prompt ([
   },
   {
     type: 'input',
-      name: 'My Github',
-      message: "What is your Github username?",
-    },
-    {
-        type: 'input',
-          name: 'Contact me',
-          message: "Tell us your best email address to get in touch",
-        },
-
-
-
-
-
-
-  {
-    type: 'list',
-      name: 'Contact method',
-      message: 'What is your preferred method of communication?',
-      choices: ['Phone', 'Email', 'Fax'],
-      filter: function (val) {
-        return val.toLowerCase();
-      },
+    name: 'My Github',
+    message: "What is your Github username?",
   },
-])
-.then((answers) => {
-  console.log(JSON.stringify(answers, null, '  '));
-});
+  {
+    type: 'input',
+    name: 'Contact me',
+    message: "Your email address?",
+  },
+
+];
+
+// Write results to a README.md document
+function writeToFile(filename, data) {
+
+  fs.appendFileSync(filename + ".md", JSON.stringify(data).slice(1, -1) + "\n", function (err) {
+    
+    // if there is an error
+    if (err) {
+      return console.log(err);
+    }
+
+    // if successfull
+    console.log("Success!");
+  });
+
+}
+
+// Function to start the program
+function init() {
+  inquirer.prompt(questions)
+
+  .then(function (response) {
+
+    console.log(response);
+
+    const data = response;
+
+    const markdown = generateMarkdown(data);
+
+    writeToFile("README". markdown); 
+  });
+
+}
+
+
+// calls and initiates the program
+init();
