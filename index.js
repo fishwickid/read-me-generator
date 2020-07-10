@@ -83,9 +83,9 @@ function init() {
 
     const data = response;
 
-    const markdown = generateMarkdown(data);
+    const mark = generateMarkdown(data);
 
-    writeToFile("README". markdown); 
+    writeToFile("README". mark); 
   });
 
 }
