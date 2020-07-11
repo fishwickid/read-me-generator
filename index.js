@@ -6,28 +6,28 @@ const generateMarkdown = require("./utils/generateMarkdown");
 const questions = [
   {
     type: 'input',
-    name: 'Title',
+    name: 'title',
     message: "What's the name of you project",
   },
   {
     type: 'input',
-    name: 'Description',
+    name: 'description',
     message: "Explain what this project about?",
   },
   {
     type: 'input',
-    name: 'Installation',
+    name: 'installation',
     message: "What are the installatoin requirements?",
   },
   {
     type: 'input',
-    name: 'Usage information',
+    name: 'usage',
     message: "Details about using this code?",
   },
   {
     type: 'checkbox',
     message: "What licence do you require?",
-    name: 'Licences',
+    name: 'licences',
     choices: [
       new inquirer.Separator(' = licence = '),
       {
@@ -46,50 +46,59 @@ const questions = [
   },
   {
     type: 'input',
-    name: 'My Github',
+    name: 'github',
     message: "What is your Github username?",
   },
   {
     type: 'input',
-    name: 'Contact me',
+    name: 'contact',
     message: "Your email address?",
   },
 
 ];
 
-// Write results to a README.md document
+// function to write README file
 function writeToFile(filename, data) {
 
+  //append stringified JSON object to new .json file
   fs.appendFileSync(filename + ".md", JSON.stringify(data).slice(1, -1) + "\n", function (err) {
-    
-    // if there is an error
-    if (err) {
-      return console.log(err);
-    }
 
-    // if successfull
-    console.log("Success!");
+      //error if unable to complete
+      if (err) {
+          return console.log(err);
+      }
+
+      //message if successful
+      console.log("Success!");
+
   });
 
 }
 
-// Function to start the program
+// function to initialize program
 function init() {
-  inquirer.prompt(questions)
+  inquirer
+  
+      //initilise questions
+      .prompt(questions)
 
-  .then(function (response) {
+      //access promise 
+      .then(function (response) {
 
-    console.log(response);
+          console.log(response);
 
-    const data = response;
+          //Save the response data as a constant
+          const data = response;
 
-    const mark = generateMarkdown(data);
-
-    writeToFile("README". mark); 
-  });
+          //save the content and convert to markdown
+          const mark = generateMarkdown(data);
+   
+          //write data to file
+          writeToFile("README", mark); 
+       
+      });
 
 }
 
-
-// calls and initiates the program
+// function call to initialize program
 init();
