@@ -91,10 +91,10 @@ function init() {
           const data = response;
 
           //save the content and convert to markdown
-          const mark = generateMarkdown(data);
+          const markdown = generateMarkdown(data);
    
           //write data to file
-          writeToFile("README", mark); 
+          writeToFile("README1", markdown); 
        
       });
 

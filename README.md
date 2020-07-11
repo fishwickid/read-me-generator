@@ -1,3 +1,24 @@
 
+# README Generator 
 
-# Project Title: README Generator<h3><ins>Descripton:</ins></h3><br>Helps user make an easy readme<h3><ins>Installaton Details:</ins></h3><br>Run \"node index.js\"<h3><ins>Usage Information:</ins></h3><br>Be specific about your code<h3><ins>Licences:</ins></h3><br><h3><ins>GitHub Account:</ins></h3><br>fishwickid<h3><ins>Contact Information:</ins></h3><br>chadfishwick@gmail.com
+This README generator will help people to write readme documents quickly, saving them precious coding time.
+
+### Installation
+
+npm install
+
+### How to use this application
+
+Once initiated, you will be asked a series of questions which will, in turn, become your README.md file. The software will continue to append to the same file, if you want to make a second file make sure to clear the readme first. 
+
+### Other Contributing Developers
+
+None
+
+### Licences
+
+None
+
+### Video
+
+https://drive.google.com/file/d/1PAK8YyEsVJkyXkIuBHUgIxt1P5Jw5OB-/view
